@@ -1,13 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Pull down to see cool loading effect"/>
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/activity_recyclerview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.ActivitiesFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Activities to be shown here ..."
-        android:textSize="14dp"/>
+</android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</LinearLayout>
