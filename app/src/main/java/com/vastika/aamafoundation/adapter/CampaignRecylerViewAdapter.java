@@ -39,7 +39,9 @@ public class CampaignRecylerViewAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-            myClickListener.onItemClick(getPosition(), v);
+           // myClickListener.onItemClick(getPosition(), v);
+
+
         }
     }
 

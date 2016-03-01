@@ -20,7 +20,6 @@ import com.vastika.aamafoundation.Model.ActivitiesModel;
 import com.vastika.aamafoundation.R;
 import com.vastika.aamafoundation.Util.Constants;
 import com.vastika.aamafoundation.adapter.ActivitiesRecyclerViewAdapter;
-import com.vastika.aamafoundation.adapter.AdapterNewsList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,19 +34,17 @@ public class ActivitiesFragment extends Fragment {
 
     View view;
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
-   // ArrayList<ActivitiesModel> activitiesList = new ArrayList<ActivitiesModel>();
 
     final String TAG_TITLE = "Title";
     final String TAG_DESCRIPTION = "Description";
     String newsUrl = Constants.BASE_URL + Constants.NEWS_URL;
     RequestQueue request;
+    boolean FLAG = false;
 
-    private ActivitiesRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    LinearLayoutManager llm;
     RecyclerView activities_recyclerview;
-    private AdapterNewsList adapterNewsList;
     ArrayList<ActivitiesModel> activitiesList = new ArrayList<ActivitiesModel>();
+    ActivitiesRecyclerViewAdapter activitiesRecyclerViewAdapter;
 
 
     @Override
@@ -61,61 +58,39 @@ public class ActivitiesFragment extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_activities, container, false);
-
-
-
-
-        activitiesList = fetchNewsData();
-
-        Log.e("Final Act Size", activitiesList.size() + "");
-
-        Log.e("Above adapter", "Its......");
-
-
-        activities_recyclerview = (RecyclerView) view.findViewById(R.id.activity_recyclerview);
-        activities_recyclerview.setHasFixedSize(true);
-
-        llm= new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        activities_recyclerview.setLayoutManager(llm);
-
-        adapterNewsList = new AdapterNewsList(getActivity());
-        activities_recyclerview.setAdapter(adapterNewsList);
+        if (!FLAG) {
+            fetchNewsData();
+            populateData();
+        } else
+            populateData();
 
         Log.e("Not here", "Not here");
-       /*
-        //frag...jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
-
-        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) view.findViewById(R.id.main_swipe);
-        mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Do work to refresh the list here.
-                mWaveSwipeRefreshLayout.setRefreshing(false);
-                // new Task().execute();
-            }
-        });
-
-
-        mAdapter = new ActivitiesRecyclerViewAdapter(activitiesList);
-
-        activities_recyclerview.setAdapter(mAdapter);*/
-
 
         return view;
     }
 
-    public ArrayList<ActivitiesModel> fetchNewsData() {
+    private void populateData() {
+
+        activities_recyclerview = (RecyclerView) view.findViewById(R.id.activity_recyclerview);
+        activities_recyclerview.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        activities_recyclerview.setLayoutManager(mLayoutManager);
+
+        activitiesRecyclerViewAdapter = new ActivitiesRecyclerViewAdapter(activitiesList);
+        activities_recyclerview.setAdapter(activitiesRecyclerViewAdapter);
+    }
+
+    public void fetchNewsData() {
 
         request = Volley.newRequestQueue(getActivity());
 
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET, newsUrl, new Response.Listener<JSONArray>() {
 
-            ArrayList<ActivitiesModel> activitiesList = new ArrayList<ActivitiesModel>();
+            ArrayList<ActivitiesModel> sendActivitiesList = new ArrayList<ActivitiesModel>();
 
             @Override
             public void onResponse(JSONArray response) {
-
 
 
                 for (int i = 0; i < response.length(); i++) {
@@ -132,13 +107,13 @@ public class ActivitiesFragment extends Fragment {
                             Log.e("Title", title + "");
                             model.setTitle(title);
                             model.setDescription(description);
-                            activitiesList.add(model);
-                            Log.e("ActSz", activitiesList.size() + "");
+                            sendActivitiesList.add(model);
+                            Log.e("ActSz", sendActivitiesList.size() + "");
+                            activitiesRecyclerViewAdapter.notifyDataSetChanged();
 
-                           // mAdapter.notifyDataSetChanged();
 
                         } else
-                          showDialog();
+                            showDialog();
 
 
                     } catch (JSONException e) {
@@ -146,10 +121,12 @@ public class ActivitiesFragment extends Fragment {
                     }
                 }
 
-                Log.e("Test b4 adapter ActSz", activitiesList.size() + "");
+                saveData(sendActivitiesList);
+                Log.e("Test b4 adapter ActSz", sendActivitiesList.size() + "");
 
-                adapterNewsList.setNewsList(activitiesList);
+
             }
+
 
         }, new Response.ErrorListener() {
             @Override
@@ -161,7 +138,17 @@ public class ActivitiesFragment extends Fragment {
         });
         request.add(jsonObjReq);
 
-        return activitiesList;
+
+    }
+
+    private void saveData(ArrayList<ActivitiesModel> sendActivitiesList) {
+
+        activitiesList.addAll(sendActivitiesList);
+        FLAG = true;
+
+        //adapterNewsList.setNewsList(activitiesList);
+        Log.e("K aayo save vitra", activitiesList.size() + "");
+
 
     }
 
@@ -174,6 +161,17 @@ public class ActivitiesFragment extends Fragment {
         pDialog.setCancelable(true);
         pDialog.show();
     }
+    /*@Override
+    public void onResume() {
+        super.onResume();
+        ((ActivitiesRecyclerViewAdapter) mAdapter).setOnItemClickListener(new ActivitiesRecyclerViewAdapter.MyClickListener() {
+            @Override
+            public void onItemClick(final int position, View v) {
+                Toast.makeText(getActivity(),"Clicked on Item " + position, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }*/
 
 
 }

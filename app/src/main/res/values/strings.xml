@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Aama Foundation</string>
+    <string name="app_name">Aama Foundation Nepal</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="about_us">Aama Foundation is a non-profit organization.Aama Foundation is a non-profit organization, Aama Foundation is a non-profit organization. Aama Foundation is a non-profit organization, Aama Foundation is a non-profit organizationr. Aama Foundation is a non-profit organization Aama Foundation is a non-profit organization.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,7 +1,5 @@
 package com.vastika.aamafoundation.Model;
 
-import java.util.ArrayList;
-
 /**
  * Created by Almighty Amir on 11-Feb-16.
  */
@@ -16,7 +14,6 @@ public class CampaignModel {
      * EventDate : /Date(1422864000000)/
      * Related : related things will go here
      */
-    private ArrayList<CampaignModel>campaignEntity;
     private int ID;
     private String Title;
     private String Description;
@@ -72,13 +69,6 @@ public class CampaignModel {
         return Related;
     }
 
-    public ArrayList<CampaignModel> getCampaignEntity() {
 
-        return campaignEntity;
-    }
 
-    public void setCampaignEntity(ArrayList<CampaignModel> campaignEntity) {
-        campaignEntity.add(new CampaignModel());
-        this.campaignEntity = campaignEntity;
-    }
 }

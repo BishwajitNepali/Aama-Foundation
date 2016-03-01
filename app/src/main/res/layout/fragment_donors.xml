@@ -4,9 +4,11 @@
     android:layout_height="match_parent"
     tools:context=".fragment.DonorsFragment">
 
-    <TextView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/donors_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Donors to be shown here ..."
-        android:textSize="14dp"/>
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </FrameLayout>

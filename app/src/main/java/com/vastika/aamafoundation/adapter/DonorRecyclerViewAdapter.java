@@ -31,15 +31,15 @@ public class DonorRecyclerViewAdapter extends RecyclerView
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            // label = (TextView) itemView.findViewById(R.id.wish_text);
-            image = (ImageView) itemView.findViewById(R.id.image);
+            label = (TextView) itemView.findViewById(R.id.donorName);
+            //image = (ImageView) itemView.findViewById(R.id.image);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            myClickListener.onItemClick(getPosition(), v);
+           // myClickListener.onItemClick(getPosition(), v);
         }
     }
 
@@ -55,7 +55,7 @@ public class DonorRecyclerViewAdapter extends RecyclerView
     public DataObjectHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.campaign_row, parent, false);
+                .inflate(R.layout.donor_row, parent, false);
 
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
         return dataObjectHolder;
@@ -63,7 +63,7 @@ public class DonorRecyclerViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        // holder.label.setText(mDataset.get(position).getWishes());
+         holder.label.setText(mDataset.get(position).getTitle());
         // holder.image.setImageResource(mDataset.get(position).getImage());
     }
 

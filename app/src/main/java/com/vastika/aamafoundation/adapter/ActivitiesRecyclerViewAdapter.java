@@ -40,7 +40,9 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-            myClickListener.onItemClick(getPosition(), v);
+
+            //You have to enable this to make onclick right tq guys!!
+            //myClickListener.onItemClick(getPosition(), v);
         }
     }
 
