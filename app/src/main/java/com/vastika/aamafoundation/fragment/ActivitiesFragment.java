@@ -1,5 +1,6 @@
 package com.vastika.aamafoundation.fragment;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,10 +42,13 @@ public class ActivitiesFragment extends Fragment {
     RequestQueue request;
     boolean FLAG = false;
 
+    ProgressDialog pDialog;
+
     private RecyclerView.LayoutManager mLayoutManager;
     RecyclerView activities_recyclerview;
     ArrayList<ActivitiesModel> activitiesList = new ArrayList<ActivitiesModel>();
     ActivitiesRecyclerViewAdapter activitiesRecyclerViewAdapter;
+    ActivitiesRecyclerViewAdapter mAdapter;
 
 
     @Override
@@ -58,13 +62,13 @@ public class ActivitiesFragment extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_activities, container, false);
+
+
         if (!FLAG) {
-            fetchNewsData();
+            fetchNewsData(newsUrl);
             populateData();
         } else
             populateData();
-
-        Log.e("Not here", "Not here");
 
         return view;
     }
@@ -77,15 +81,19 @@ public class ActivitiesFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         activities_recyclerview.setLayoutManager(mLayoutManager);
 
-        activitiesRecyclerViewAdapter = new ActivitiesRecyclerViewAdapter(activitiesList);
+        activitiesRecyclerViewAdapter = new ActivitiesRecyclerViewAdapter(activitiesList, getContext());
         activities_recyclerview.setAdapter(activitiesRecyclerViewAdapter);
     }
 
-    public void fetchNewsData() {
+    public void fetchNewsData(String Url) {
+
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.show();
 
         request = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET, newsUrl, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET, Url, new Response.Listener<JSONArray>() {
 
             ArrayList<ActivitiesModel> sendActivitiesList = new ArrayList<ActivitiesModel>();
 
@@ -123,6 +131,7 @@ public class ActivitiesFragment extends Fragment {
 
                 saveData(sendActivitiesList);
                 Log.e("Test b4 adapter ActSz", sendActivitiesList.size() + "");
+                pDialog.hide();
 
 
             }
@@ -131,7 +140,7 @@ public class ActivitiesFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                showDialog();
+                pDialog.hide();
 
             }
 
@@ -161,17 +170,6 @@ public class ActivitiesFragment extends Fragment {
         pDialog.setCancelable(true);
         pDialog.show();
     }
-    /*@Override
-    public void onResume() {
-        super.onResume();
-        ((ActivitiesRecyclerViewAdapter) mAdapter).setOnItemClickListener(new ActivitiesRecyclerViewAdapter.MyClickListener() {
-            @Override
-            public void onItemClick(final int position, View v) {
-                Toast.makeText(getActivity(),"Clicked on Item " + position, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }*/
 
 
 }

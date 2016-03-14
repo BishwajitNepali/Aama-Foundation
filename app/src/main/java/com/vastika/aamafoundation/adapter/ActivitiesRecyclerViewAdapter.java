@@ -3,6 +3,9 @@ package com.vastika.aamafoundation.adapter;
 /**
  * Created by Almighty Amir on 11-Feb-16.
  */
+
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 
 import com.vastika.aamafoundation.Model.ActivitiesModel;
 import com.vastika.aamafoundation.R;
+import com.vastika.aamafoundation.activity.NewsDetailActivity;
 
 import java.util.ArrayList;
 
@@ -19,8 +23,8 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView
         .Adapter<ActivitiesRecyclerViewAdapter
         .DataObjectHolder> {
     private static String LOG_TAG = "MyRecyclerViewAdapter";
-    private ArrayList<ActivitiesModel> mDataset;
-    private static MyClickListener myClickListener;
+    public static ArrayList<ActivitiesModel> mDataset;
+    static Context context;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
@@ -41,17 +45,17 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView
         @Override
         public void onClick(View v) {
 
-            //You have to enable this to make onclick right tq guys!!
-            //myClickListener.onItemClick(getPosition(), v);
+            Intent i= new Intent(context, NewsDetailActivity.class);
+            i.putExtra("title",mDataset.get(getAdapterPosition()).getTitle()+"");
+            i.putExtra("description",mDataset.get(getAdapterPosition()).getDescription()+"");
+
+            context.startActivity(i);
         }
     }
 
-    public void setOnItemClickListener(MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
-    }
-
-    public ActivitiesRecyclerViewAdapter(ArrayList<ActivitiesModel> myDataset) {
+    public ActivitiesRecyclerViewAdapter(ArrayList<ActivitiesModel> myDataset, Context context) {
         mDataset = myDataset;
+        this.context=context;
     }
 
     @Override
@@ -69,6 +73,7 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView
          holder.title.setText(mDataset.get(position).getTitle());
          holder.description.setText(mDataset.get(position).getDescription());
         // holder.image.setImageResource(mDataset.get(position).getImage());
+
     }
 
     public void addItem(ActivitiesModel dataObj, int index) {
@@ -86,8 +91,5 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView
         return mDataset.size();
     }
 
-    public interface MyClickListener {
-        public void onItemClick(int position, View v);
-    }
 }
 

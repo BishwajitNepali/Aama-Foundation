@@ -1,5 +1,6 @@
 package com.vastika.aamafoundation.fragment;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,9 @@ public class CampaignFragment extends Fragment {
     final String  TAG_EVENT_DATE="EventDate";
     final String  TAG_RELATED="Related";
 
+    boolean FLAG = false;
+    ProgressDialog pDialog;
+
     String newsUrl = Constants.BASE_URL + Constants.CAMPAIGN_URL;
     RequestQueue request;
     CampaignRecylerViewAdapter campaignRecylerViewAdapter;
@@ -67,7 +71,17 @@ public class CampaignFragment extends Fragment {
 
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_campaign, container, false);
-        fetchCampaignData();
+        if (!FLAG  ) {
+            fetchCampaignData();
+            populateData();
+        } else
+            populateData();
+
+
+        return view;
+    }
+
+    private void populateData() {
 
         campaignRecyclerView = (RecyclerView) view.findViewById(R.id.campaign_recyclerview);
         campaignRecyclerView.setHasFixedSize(true);
@@ -75,13 +89,15 @@ public class CampaignFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         campaignRecyclerView.setLayoutManager(mLayoutManager);
 
-        campaignRecylerViewAdapter = new CampaignRecylerViewAdapter(campaignList);
+        campaignRecylerViewAdapter = new CampaignRecylerViewAdapter(campaignList,getContext());
         campaignRecyclerView.setAdapter(campaignRecylerViewAdapter);
-
-        return view;
     }
 
     public void fetchCampaignData() {
+
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.show();
 
         request = Volley.newRequestQueue(getActivity());
 
@@ -132,6 +148,7 @@ public class CampaignFragment extends Fragment {
 
                 saveData(sendCampaignList);
                 Log.e("Test b4 adapter ActSz", sendCampaignList.size() + "");
+                pDialog.hide();
 
 
             }
@@ -140,7 +157,7 @@ public class CampaignFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                showDialog();
+                pDialog.hide();
 
             }
 

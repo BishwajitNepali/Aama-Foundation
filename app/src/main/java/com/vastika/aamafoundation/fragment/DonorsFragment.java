@@ -1,5 +1,6 @@
 package com.vastika.aamafoundation.fragment;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,7 @@ public class DonorsFragment extends Fragment {
     String newsUrl = Constants.BASE_URL + Constants.NEWS_URL;
     RequestQueue request;
     boolean FLAG=false;
+    ProgressDialog pDialog;
 
     private RecyclerView.LayoutManager mLayoutManager;
     RecyclerView donors_recyclerview;
@@ -84,6 +86,9 @@ public class DonorsFragment extends Fragment {
     }
 
     public void fetchDonorsData() {
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.show();
 
         request = Volley.newRequestQueue(getActivity());
 
@@ -125,6 +130,7 @@ public class DonorsFragment extends Fragment {
 
                 saveData(sendActivitiesList);
                 Log.e("Test b4 adapter ActSz", donorsList.size() + "");
+                pDialog.hide();
 
 
             }
@@ -133,7 +139,7 @@ public class DonorsFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                showDialog();
+                pDialog.hide();
 
             }
 

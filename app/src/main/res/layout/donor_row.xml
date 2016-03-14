@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:id="@+id/donorName"
                     android:textColor="@android:color/holo_red_dark"
                     android:text="Donor Name"/>
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:maxLines="4"
                     android:id="@+id/donorAdd"
                     android:text="Donor Address"/>
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:maxLines="4"
                     android:id="@+id/donorAmount"
                     android:text="$$$"/>

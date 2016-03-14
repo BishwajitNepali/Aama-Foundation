@@ -3,6 +3,7 @@ package com.vastika.aamafoundation.adapter;
 /**
  * Created by Almighty Amir on 11-Feb-16.
  */
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,6 @@ public class DonorRecyclerViewAdapter extends RecyclerView
         .DataObjectHolder> {
     private static String LOG_TAG = "MyRecyclerViewAdapter";
     private ArrayList<DonorModel> mDataset;
-    private static MyClickListener myClickListener;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
@@ -39,13 +39,10 @@ public class DonorRecyclerViewAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-           // myClickListener.onItemClick(getPosition(), v);
+            // myClickListener.onItemClick(getPosition(), v);
         }
     }
 
-    public void setOnItemClickListener(MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
-    }
 
     public DonorRecyclerViewAdapter(ArrayList<DonorModel> myDataset) {
         mDataset = myDataset;
@@ -63,7 +60,7 @@ public class DonorRecyclerViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-         holder.label.setText(mDataset.get(position).getTitle());
+        holder.label.setText(mDataset.get(position).getTitle());
         // holder.image.setImageResource(mDataset.get(position).getImage());
     }
 
@@ -82,8 +79,5 @@ public class DonorRecyclerViewAdapter extends RecyclerView
         return mDataset.size();
     }
 
-    public interface MyClickListener {
-        public void onItemClick(int position, View v);
-    }
 }
 
