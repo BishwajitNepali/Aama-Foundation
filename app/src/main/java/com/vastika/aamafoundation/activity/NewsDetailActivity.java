@@ -18,6 +18,9 @@ public class NewsDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         newstitle=(TextView)findViewById(R.id.newsTitle);
         newsdescription=(TextView)findViewById(R.id.newsDesc);
 

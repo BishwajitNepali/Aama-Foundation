@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.vastika.aamafoundation.Model.ActivitiesModel;
 import com.vastika.aamafoundation.R;
 import com.vastika.aamafoundation.activity.NewsDetailActivity;
@@ -25,19 +27,20 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView
     private static String LOG_TAG = "MyRecyclerViewAdapter";
     public static ArrayList<ActivitiesModel> mDataset;
     static Context context;
+    static ImageView image;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
         TextView title;
         TextView description;
-       // ImageView image;
+
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.newsTitle);
             description = (TextView) itemView.findViewById(R.id.newsDesc);
-            //image = (ImageView) itemView.findViewById(R.id.image);
+            image = (ImageView) itemView.findViewById(R.id.newsLogo);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -73,6 +76,7 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView
          holder.title.setText(mDataset.get(position).getTitle());
          holder.description.setText(mDataset.get(position).getDescription());
         // holder.image.setImageResource(mDataset.get(position).getImage());
+        Picasso.with(context).load(R.drawable.hot_news).centerCrop().fit().into(image);
 
     }
 

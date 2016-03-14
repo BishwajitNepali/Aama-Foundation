@@ -18,7 +18,7 @@
             <ImageView
                 android:id="@+id/newsLogo"
                 android:layout_width="100dp"
-                android:background="@drawable/hot_news"
+
                 android:layout_height="100dp"/>
             <LinearLayout
                 android:layout_width="wrap_content"

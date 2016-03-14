@@ -81,7 +81,7 @@ public class DonorsFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         donors_recyclerview.setLayoutManager(mLayoutManager);
 
-        donorsRecyclerViewAdapter = new DonorRecyclerViewAdapter(donorsList);
+        donorsRecyclerViewAdapter = new DonorRecyclerViewAdapter(donorsList, getActivity());
         donors_recyclerview.setAdapter(donorsRecyclerViewAdapter);
     }
 

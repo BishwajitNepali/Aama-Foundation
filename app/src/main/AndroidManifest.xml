@@ -22,8 +22,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GalleryActivity" />
-        <activity android:name=".activity.NewsDetailActivity"></activity>
+        <activity
+            android:name=".activity.GalleryActivity"
+            android:parentActivityName="activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.NewsDetailActivity"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vastika.aamafoundation.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.IntroductionActivity"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vastika.aamafoundation.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

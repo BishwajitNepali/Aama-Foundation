@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.vastika.aamafoundation.Model.CampaignModel;
 import com.vastika.aamafoundation.R;
 import com.vastika.aamafoundation.activity.NewsDetailActivity;
@@ -27,18 +28,19 @@ public class CampaignRecylerViewAdapter extends RecyclerView
     private static String LOG_TAG = "MyRecyclerViewAdapter";
     private static ArrayList<CampaignModel> mDataset;
     static Context context;
+    static ImageView image;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
         TextView label;
-        ImageView image;
+
         Button donate,read,share;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
              label = (TextView) itemView.findViewById(R.id.campaign_title);
-            //image = (ImageView) itemView.findViewById(R.id.image);
+            image = (ImageView) itemView.findViewById(R.id.campaign_logo);
             donate=(Button)itemView.findViewById(R.id.donate);
             read=(Button)itemView.findViewById(R.id.read);
             share=(Button)itemView.findViewById(R.id.share);
@@ -113,6 +115,7 @@ public class CampaignRecylerViewAdapter extends RecyclerView
     public void onBindViewHolder(DataObjectHolder holder, int position) {
          holder.label.setText(mDataset.get(position).getTitle());
         // holder.image.setImageResource(mDataset.get(position).getImage());
+        Picasso.with(context).load(R.drawable.campaign_bannermain).centerCrop().fit().into(image);
     }
 
     public void addItem(CampaignModel dataObj, int index) {

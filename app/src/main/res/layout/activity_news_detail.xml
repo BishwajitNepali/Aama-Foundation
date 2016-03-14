@@ -25,7 +25,7 @@
         android:layout_below="@+id/newsLogo"
         android:id="@+id/newsTitle"
         android:textColor="@android:color/holo_red_dark"
-        android:text="News Title goes Here Let it be"/>
+        android:text="Aama Foundation Nepal"/>
 
 
     <TextView
@@ -34,7 +34,6 @@
         android:layout_marginTop="7dp"
         android:layout_below="@+id/newsTitle"
         android:textSize="15sp"
-        android:maxLines="3"
         android:id="@+id/newsDesc"
         android:text="News description goes out here"/>
 

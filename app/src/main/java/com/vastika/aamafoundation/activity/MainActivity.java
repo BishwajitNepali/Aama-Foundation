@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.vastika.aamafoundation.R;
 import com.vastika.aamafoundation.Util.Constants;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    private ImageView navImage;
 
     private final int PROGRESS_TIME=2000;
 
@@ -59,7 +62,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        /*navImage = (ImageView) findViewById(R.id.navLogo);
+        Picasso.with(this).load(R.drawable.logo).centerCrop().fit().into(navImage);*/
 
 
     }
@@ -126,10 +130,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_introduction) {
-            // Handle the camera action
-            String title= getResources().getString(R.string.about_us);
 
-            showDialog(title);
+            Intent intent = new Intent(MainActivity.this, IntroductionActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_gallery) {
 

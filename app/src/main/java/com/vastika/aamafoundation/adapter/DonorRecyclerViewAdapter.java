@@ -4,6 +4,7 @@ package com.vastika.aamafoundation.adapter;
  * Created by Almighty Amir on 11-Feb-16.
  */
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.vastika.aamafoundation.Model.DonorModel;
 import com.vastika.aamafoundation.R;
 
@@ -22,17 +24,20 @@ public class DonorRecyclerViewAdapter extends RecyclerView
         .DataObjectHolder> {
     private static String LOG_TAG = "MyRecyclerViewAdapter";
     private ArrayList<DonorModel> mDataset;
+    static ImageView image;
+
+    static Context context;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
         TextView label;
-        ImageView image;
+
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             label = (TextView) itemView.findViewById(R.id.donorName);
-            //image = (ImageView) itemView.findViewById(R.id.image);
+            image = (ImageView) itemView.findViewById(R.id.newsLogo);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -44,8 +49,9 @@ public class DonorRecyclerViewAdapter extends RecyclerView
     }
 
 
-    public DonorRecyclerViewAdapter(ArrayList<DonorModel> myDataset) {
+    public DonorRecyclerViewAdapter(ArrayList<DonorModel> myDataset, Context context) {
         mDataset = myDataset;
+        this.context = context;
     }
 
     @Override
@@ -62,6 +68,7 @@ public class DonorRecyclerViewAdapter extends RecyclerView
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.label.setText(mDataset.get(position).getTitle());
         // holder.image.setImageResource(mDataset.get(position).getImage());
+        Picasso.with(context).load(R.drawable.man).centerCrop().fit().into(image);
     }
 
     public void addItem(DonorModel dataObj, int index) {
