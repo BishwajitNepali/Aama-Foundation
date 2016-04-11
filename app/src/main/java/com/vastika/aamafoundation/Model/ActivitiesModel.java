@@ -59,9 +59,7 @@ public class ActivitiesModel {
         return ID;
     }
 
-    public String getTitle() {
-        return Title;
-    }
+    public String getTitle() { return Title; }
 
     public String getDescription() {
         return Description;
@@ -79,7 +77,5 @@ public class ActivitiesModel {
         return PublishedDate;
     }
 
-    public String getRelated() {
-        return Related;
-    }
+    public String getRelated() { return Related; }
 }
