@@ -22,6 +22,7 @@ import com.vastika.aamafoundation.adapter.ViewPagerAdapter;
 import com.vastika.aamafoundation.fragment.ActivitiesFragment;
 import com.vastika.aamafoundation.fragment.CampaignFragment;
 import com.vastika.aamafoundation.fragment.DonorsFragment;
+import com.vastika.aamafoundation.youtube.YouTubeActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -144,7 +145,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_videos) {
 
-            showDialog("Work In Progress");
+            //showDialog("Work In Progress");
+            Intent i= new Intent(MainActivity.this,YouTubeActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_contact_us) {
 
