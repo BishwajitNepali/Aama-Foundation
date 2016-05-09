@@ -1,4 +1,4 @@
-package com.vastika.aamafoundation;
+package com.vastika.aamafoundation.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -8,16 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.activeandroid.ActiveAndroid;
-import com.activeandroid.util.Log;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpRequest;
-import com.loopj.android.http.BaseJsonHttpResponseHandler;
-import com.loopj.android.http.RequestHandle;
-import com.vastika.aamafoundation.activity.MainActivity;
-
-import org.json.JSONArray;
-
-import cz.msebera.android.httpclient.Header;
+import com.vastika.aamafoundation.R;
 
 
 public class SplashScreenActivity extends AppCompatActivity {
